@@ -46,25 +46,25 @@ export const api = createApi({
   endpoints: (builder) => ({
     trendingPodcasts: builder.query<Episode, GetPostsQueryArgs>({
       query: ({ page = 1, per_page = 15 }) =>
-        `${apUrl}top-podcasts?page=${page}&per_page=${per_page}`,
+        `/top-podcasts?page=${page}&per_page=${per_page}`,
       transformResponse: (response: { data: { data: Episode } }) => response.data.data,
     }),
     trendingEpisodes: builder.query<Episode, GetPostsQueryArgs>({
       query: ({ page, per_page }) =>
-        `${apUrl}popular-and-trending-podcasts?page=${page}&per_page=${per_page}`,
+        `/popular-and-trending-podcasts?page=${page}&per_page=${per_page}`,
       transformResponse: (response: { data: { data: Episode } }) => response.data.data,
     }),
     topCategories: builder.query<Episode, TopCategoryQueryArgs>({
-      query: ({ category }) => `${apUrl}top-categories?category=${category}`,
+      query: ({ category }) => `/top-categories?category=${category}`,
       transformResponse: (response: { data: { data: Episode } }) => response.data.data,
     }),
     getALLPodcasts: builder.query<Episode, GetPostsQueryArgs>({
       query: ({ page, per_page }) =>
-        `${apUrl}popular-and-trending-podcasts?page=${page}&per_page=${per_page}`,
+        `/popular-and-trending-podcasts?page=${page}&per_page=${per_page}`,
       transformResponse: (response: { data: { data: Episode } }) => response.data.data,
     }),
     getPodcast: builder.query<Episode, { podcastId: number }>({
-      query: ({ podcastId }) => `${apUrl}podcasts/${podcastId}`,
+      query: ({ podcastId }) => `/podcasts/${podcastId}`,
       transformResponse: (response: { data: Episode }) => response.data,
     }),
     getPodcastEpisodes: builder.query<PaginatedEpisodes, { podcastId: number; page: number; per_page: number }>({
@@ -77,7 +77,7 @@ export const api = createApi({
     }),
     searchPodcasts: builder.query<PaginatedEpisodes, { query: string; page?: number; per_page?: number }>({
       query: ({ query, page = 1, per_page = 15 }) =>
-        `${apUrl}podcast/search?q=${encodeURIComponent(query)}&page=${page}&per_page=${per_page}`,
+        `/podcast/search?q=${encodeURIComponent(query)}&page=${page}&per_page=${per_page}`,
     }),
   }),
 });
