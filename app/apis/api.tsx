@@ -38,46 +38,46 @@ export interface PaginatedEpisodes {
   total: number;
 }
 
-const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+const apUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: `${apiUrl}` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${apUrl}` }),
   endpoints: (builder) => ({
     trendingPodcasts: builder.query<Episode, GetPostsQueryArgs>({
       query: ({ page = 1, per_page = 15 }) =>
-        `${apiUrl}top-podcasts?page=${page}&per_page=${per_page}`,
+        `${apUrl}top-podcasts?page=${page}&per_page=${per_page}`,
       transformResponse: (response: { data: { data: Episode } }) => response.data.data,
     }),
     trendingEpisodes: builder.query<Episode, GetPostsQueryArgs>({
       query: ({ page, per_page }) =>
-        `${apiUrl}popular-and-trending-podcasts?page=${page}&per_page=${per_page}`,
+        `${apUrl}popular-and-trending-podcasts?page=${page}&per_page=${per_page}`,
       transformResponse: (response: { data: { data: Episode } }) => response.data.data,
     }),
     topCategories: builder.query<Episode, TopCategoryQueryArgs>({
-      query: ({ category }) => `${apiUrl}top-categories?category=${category}`,
+      query: ({ category }) => `${apUrl}top-categories?category=${category}`,
       transformResponse: (response: { data: { data: Episode } }) => response.data.data,
     }),
     getALLPodcasts: builder.query<Episode, GetPostsQueryArgs>({
       query: ({ page, per_page }) =>
-        `${apiUrl}popular-and-trending-podcasts?page=${page}&per_page=${per_page}`,
+        `${apUrl}popular-and-trending-podcasts?page=${page}&per_page=${per_page}`,
       transformResponse: (response: { data: { data: Episode } }) => response.data.data,
     }),
     getPodcast: builder.query<Episode, { podcastId: number }>({
-      query: ({ podcastId }) => `${apiUrl}podcasts/${podcastId}`,
+      query: ({ podcastId }) => `${apUrl}podcasts/${podcastId}`,
       transformResponse: (response: { data: Episode }) => response.data,
     }),
     getPodcastEpisodes: builder.query<PaginatedEpisodes, { podcastId: number; page: number; per_page: number }>({
-      query: ({ podcastId,  page, per_page }) => `${apiUrl}podcasts/${podcastId}/episodes?page=${page}&per_page=${per_page}`,
+      query: ({ podcastId,  page, per_page }) => `${apUrl}podcasts/${podcastId}/episodes?page=${page}&per_page=${per_page}`,
       transformResponse: (response: { data: PaginatedEpisodes }) => response.data,
     }),
     getEpisode: builder.query<Episode, { episodeId: number }>({
-      query: ({ episodeId }) => `${apiUrl}episodes/${episodeId}`,
+      query: ({ episodeId }) => `${apUrl}episodes/${episodeId}`,
       transformResponse: (response: { data: Episode }) => response.data,
     }),
     searchPodcasts: builder.query<PaginatedEpisodes, { query: string; page?: number; per_page?: number }>({
       query: ({ query, page = 1, per_page = 15 }) =>
-        `${apiUrl}podcast/search?q=${encodeURIComponent(query)}&page=${page}&per_page=${per_page}`,
+        `${apUrl}podcast/search?q=${encodeURIComponent(query)}&page=${page}&per_page=${per_page}`,
     }),
   }),
 });
