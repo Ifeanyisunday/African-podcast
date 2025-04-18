@@ -38,11 +38,11 @@ export interface PaginatedEpisodes {
   total: number;
 }
 
-// const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://api.wokpa.app/api/listeners/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${apiUrl}` }),
   endpoints: (builder) => ({
     trendingPodcasts: builder.query<Episode, GetPostsQueryArgs>({
       query: ({ page = 1, per_page = 15 }) =>
