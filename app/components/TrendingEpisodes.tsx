@@ -15,21 +15,21 @@ const TrendingEpisodes = () => {
           <img src="Group 1117.png" alt="App Logo" className="mt-5"/>
           <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
             {Array.isArray(data) ? (
-              data.map((podcast, index) => (
-                <Link href={`/podcast/${podcast.id}`} key={podcast.id}>
+              data.map((episode, index) => (
+                <Link href={`/episode/${episode.id}`} key={episode.id}>
                 <div
                   key={index}
                   className="min-w-[250px] bg-white shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex-shrink-0"
                 >
                   <img
-                    src={podcast.picture_url}
-                    alt={podcast.title}
+                    src={episode.picture_url}
+                    alt={episode.title}
                     className="w-80 h-100 object-cover mt-10"
                   />
                   <div className="p-4">
-                    <h2 className="text-lg font-semibold mb-2 truncate">{podcast.title}</h2>
+                    <h2 className="text-lg font-semibold mb-2 truncate">{episode.title}</h2>
                     <p className="text-sm text-gray-500">
-                      {new Date(podcast.created_at).toLocaleDateString()}
+                      {new Date(episode.created_at).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="flex space-x-4 mt-3 mb-5 ml-4">

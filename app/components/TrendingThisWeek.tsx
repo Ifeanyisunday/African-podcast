@@ -1,9 +1,10 @@
 import React from 'react'
-import { useTrendingPodcastsQuery } from '@/app/apis/api';
+import { useGetALLPodcastsQuery } from '@/app/apis/api';
 import Link from 'next/link';
 
 const TrendingWeek = () => {
-    const { data, error, isLoading } = useTrendingPodcastsQuery({ page: 1, per_page: 10 });
+
+    const { data, error, isLoading } = useGetALLPodcastsQuery({ page: 1, per_page: 10 });
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading podcasts</div>;
@@ -14,7 +15,7 @@ const TrendingWeek = () => {
           <img src="Group 1117.png" alt="App Logo" className="mt-5"/>
           <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
             {Array.isArray(data) ? (
-              data?.map((podcast, index) => (
+              data.map((podcast, index) => (
               <Link href={`/podcast/${podcast.id}`} key={podcast.id}>
               <div
                 key={index}
