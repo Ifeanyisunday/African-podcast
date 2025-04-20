@@ -14,23 +14,25 @@ const TrendingWeek = () => {
           <img src="Group 1117.png" alt="App Logo" className="mt-5"/>
           <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
             {Array.isArray(data) ? (
-              data?.map((post, index) => (
+              data?.map((podcast, index) => (
+              <Link href={`/podcast/${podcast.id}`} key={podcast.id}>
               <div
                 key={index}
                 className="min-w-[250px] bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex-shrink-0"
               >
                 <img
-                  src={post.picture_url}
-                  alt={post.title}
+                  src={podcast.picture_url}
+                  alt={podcast.title}
                   className="w-80 h-100 object-cover mt-10"
                 />
                 <div className="p-4">
-                  <h2 className="text-lg font-semibold mb-2 truncate">{post.title}</h2>
+                  <h2 className="text-lg font-semibold mb-2 truncate">{podcast.title}</h2>
                   <p className="text-sm text-gray-500">
-                    {new Date(post.created_at).toLocaleDateString()}
+                    {new Date(podcast.created_at).toLocaleDateString()}
                   </p>
                 </div>
               </div>
+              </Link>
             ))
           ) : (
             <p>No podcasts available</p>)
